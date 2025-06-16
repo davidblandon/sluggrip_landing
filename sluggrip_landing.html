@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlugGrip | Protection Durable des Palettes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8f5f 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .header-scrolled {
+            background: rgba(26, 95, 63, 0.95);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 1rem;
+            background-image: url("SlugGrip Logo with no name.png"); /* o el nombre sin espacios */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 50%;
+        }
+
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #a8e6a3;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #a8e6a3;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #a8e6a3 0%, #4ade80 100%);
+            color: #1a5f3f;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(168, 230, 163, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 230, 163, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8f5f 50%, #4ade80 100%);
+            color: white;
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 60%, rgba(168, 230, 163, 0.2) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 20%, rgba(74, 222, 128, 0.15) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #ffffff 0%, #a8e6a3 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #a8e6a3 0%, #4ade80 100%);
+            color: #1a5f3f;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(168, 230, 163, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(168, 230, 163, 0.4);
+        }
+
+        .btn-secondary {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #a8e6a3;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeInRight 1s ease-out 0.6s both;
+        }
+
+        .hero-logo {
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-logo svg {
+            width: 250px;
+            height: 250px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+        }
+
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #1a5f3f;
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Process Section */
+        .process {
+            background: #1a5f3f;
+            padding: 100px 0;
+            color: white;
+        }
+
+        .process-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            background: rgba(255,255,255,0.05);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #a8e6a3 0%, #4ade80 100%);
+            color: #1a5f3f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 2rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #a8e6a3;
+        }
+
+        .process-step p {
+            opacity: 0.9;
+            line-height: 1.7;
+        }
+
+        /* Activities Section */
+        .activities {
+            padding: 100px 0;
+            background: #f8fafc;
+        }
+
+        .activities-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(26, 95, 63, 0.1);
+        }
+
+        .activity-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(26, 95, 63, 0.15);
+        }
+
+        .activity-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #a8e6a3 0%, #4ade80 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .activity-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a5f3f;
+            margin-bottom: 1rem;
+        }
+
+        .activity-card p {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            padding: 100px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #a8e6a3;
+        }
+
+        .footer-brand p {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            color: #a8e6a3;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #a8e6a3;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .hero-logo {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .activities-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Tracking Section Styles */
+        .tracking {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+
+        .tracking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .tracking-input-section {
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .tracking-input-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .tracking-input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .tracking-input:focus {
+            border-color: #4ade80;
+            box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.1);
+        }
+
+        .tracking-btn {
+            background: linear-gradient(135deg, #1a5f3f 0%, #2d8f5f 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(26, 95, 63, 0.3);
+        }
+
+        .tracking-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(26, 95, 63, 0.4);
+        }
+
+        .tracking-result {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            margin-top: 3rem;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .tracking-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .tracking-status h3 {
+            color: #1a5f3f;
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .tracking-map {
+            background: #f8fafc;
+            border-radius: 15px;
+            height: 400px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #e2e8f0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        .location-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .location-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .location-item:hover {
+            background: #f1f5f9;
+            transform: translatey(-2px);
+        }
+
+        .location-item.current {
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            border: 2px solid #4ade80;
+        }
+
+        .location-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .location-icon.origin {
+            background: #1a5f3f;
+            color: white;
+        }
+
+        .location-icon.current {
+            background: #4ade80;
+            color: #1a5f3f;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .location-icon.destination {
+            background: #64748b;
+            color: white;
+        }
+
+        .location-content h4 {
+            color: #1a5f3f;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .location-content p {
+            color: #64748b;
+            margin: 0 0 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .timestamp {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .tracking-error {
+            text-align: center;
+            padding: 2rem;
+            background: #fef2f2;
+            border: 2px solid #fecaca;
+            border-radius: 15px;
+            margin-top: 2rem;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .tracking-error p {
+            color: #dc2626;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 4px 15px rgba(74, 222, 128, 0.3);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.1);
+                box-shadow: 0 6px 25px rgba(74, 222, 128, 0.5);
+            }
+        }
+
+        @keyframes routeAnimation {
+            0%, 100% {
+                opacity: 0.7;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tracking-input-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .tracking-status {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .location-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .tracking-result {
+                padding: 2rem 1rem;
+            }
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="navbar">
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon"></div>
+                SLUGGRIP
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#solution">Solution</a></li>
+                <li><a href="#fabrication">Fabrication</a></li>
+                <li><a href="#activites">Activités</a></li>
+                <li><a href="#tracking">Suivi</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <a href="#contact" class="cta-button">Nous contacter</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Solution Innovante et Durable</h1>
+                <p>Protection des palettes lors du transport de marchandises avec un emballage plastique recyclable fabriqué à partir de polypropylène (PP) recyclé.</p>
+                <div class="hero-buttons">
+                    <a href="#solution" class="btn-primary">Découvrir la solution</a>
+                    <a href="#contact" class="btn-secondary">Nous contacter</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-logo">
+                    <svg viewBox="0 0 400 400" fill="none">
+                        <!-- Snail Body -->
+                        <path d="M100 300 Q50 250 80 200 Q120 150 180 170 Q240 190 280 240 Q300 280 270 320 Q230 350 180 340 Q130 330 100 300 Z" 
+                              fill="white" opacity="0.9"/>
+                        
+                        <!-- Snail Shell -->
+                        <circle cx="200" cy="220" r="80" fill="none" stroke="white" stroke-width="8" opacity="0.7"/>
+                        <circle cx="200" cy="220" r="50" fill="none" stroke="white" stroke-width="6" opacity="0.5"/>
+                        <circle cx="200" cy="220" r="25" fill="white" opacity="0.3"/>
+                        
+                        <!-- Antennae -->
+                        <circle cx="150" cy="180" r="8" fill="white"/>
+                        <circle cx="130" cy="170" r="8" fill="white"/>
+                        <line x1="140" y1="175" x2="150" y2="180" stroke="white" stroke-width="4"/>
+                        <line x1="140" y1="175" x2="130" y2="170" stroke="white" stroke-width="4"/>
+                        
+                        <!-- Eye -->
+                        <circle cx="120" cy="200" r="6" fill="white"/>
+                        <circle cx="120" cy="200" r="3" fill="#1a5f3f"/>
+                        
+                        <!-- Trail (representing packaging/protection) -->
+                        <path d="M280 320 Q320 340 360 330 Q380 320 370 340 Q350 360 320 350 Q290 340 280 320" 
+                              fill="white" opacity="0.4"/>
+                        <path d="M270 340 Q300 360 330 350 Q350 340 340 360 Q320 380 290 370 Q260 360 270 340" 
+                              fill="white" opacity="0.3"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="solution">
+        <div class="about-container">
+            <div class="section-header">
+                <h2>Notre Solution</h2>
+                <p>SlugGrip propose une solution innovante et durable pour la protection des palettes lors du transport de marchandises : un emballage plastique recyclable. Ce produit est fabriqué à partir de polypropylène (PP) recyclé, présenté sous forme de billes, et transformé en un tissu plastique. Pour assurer une fermeture efficace et réutilisable, des bandes de velcro sont cousues sur les bords du film.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="fabrication">
+        <div class="process-container">
+            <div class="section-header">
+                <h2 style="color: white;">Fabrication</h2>
+                <p style="color: rgba(255,255,255,0.8);">La fabrication s'appuie sur deux grandes étapes industrielles</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Extrusion</h3>
+                    <p>L'extrusion permet de créer le film plastique à partir de billes de polypropylène recyclé.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Tissage</h3>
+                    <p>Le tissage garantit robustesse et flexibilité du film plastique pour une protection optimale.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Service de maintenance</h3>
+                    <p>Récupération des emballages usagés afin de les réintégrer dans un circuit de recyclage, prolongeant ainsi leur durée de vie tout en réduisant l'empreinte environnementale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="activities" id="activites">
+        <div class="activities-container">
+            <div class="section-header">
+                <h2>Nos Activités</h2>
+                <p>SlugGrip développe et commercialise des solutions complètes pour le secteur professionnel</p>
+            </div>
+            <div class="activities-grid">
+                <div class="activity-card">
+                    <div class="activity-icon">📦</div>
+                    <h3>Activité Principale</h3>
+                    <p>Produire et commercialiser en France ou à l'étranger des systèmes et solutions de conditionnement de palettes destinés au secteur professionnel, notamment dans les domaines des transports. Incluant la conception et le développement des produits commercialisés.</p>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">🔧</div>
+                    <h3>Activité Secondaire</h3>
+                    <p>Assurer des prestations d'assistances techniques, de maintenance et de services après-vente sur les systèmes et solutions de conditionnement précédemment commercialisés en France ou à l'étranger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking" id="tracking">
+        <div class="tracking-container">
+            <div class="section-header">
+                <h2>Suivi de vos Emballages</h2>
+                <p>Entrez votre numéro de suivi pour localiser votre emballage SlugGrip</p>
+            </div>
+            
+            <div class="tracking-input-section">
+                <div class="tracking-input-container">
+                    <input type="text" id="trackingNumber" placeholder="Entrez votre numéro de suivi" class="tracking-input">
+                    <button onclick="trackPackage()" class="tracking-btn">Suivre</button>
+                </div>
+            </div>
+
+            <div id="trackingResult" class="tracking-result" style="display: none;">
+                <div class="tracking-status">
+                    <h3>📦 Emballage SlugGrip #0000</h3>
+                    <div class="status-badge">En transit</div>
+                </div>
+                
+                <div class="tracking-map">
+                    <div id="map"></div>
+                </div>
+                
+                <div class="tracking-details">
+                    <div class="location-info">
+                        <div class="location-item">
+                            <div class="location-icon origin">🏭</div>
+                            <div class="location-content">
+                                <h4>Origine</h4>
+                                <p>Tarbes, France</p>
+                                <span class="timestamp">Départ: 15/06/2025 08:00</span>
+                            </div>
+                        </div>
+                        
+                        <div class="location-item current">
+                            <div class="location-icon current">📍</div>
+                            <div class="location-content">
+                                <h4>Position Actuelle</h4>
+                                <p>Toulouse, France</p>
+                                <span class="timestamp">Dernière mise à jour: 16/06/2025 14:30</span>
+                            </div>
+                        </div>
+                        
+                        <div class="location-item">
+                            <div class="location-icon destination">🏪</div>
+                            <div class="location-content">
+                                <h4>Destination</h4>
+                                <p>Paris, France</p>
+                                <span class="timestamp">Livraison prévue: 17/06/2025 10:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="trackingError" class="tracking-error" style="display: none;">
+                <p>❌ Numéro de suivi invalide. Veuillez vérifier et réessayer.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="cta-container">
+            <h2>Contactez SlugGrip</h2>
+            <p>Découvrez notre solution innovante pour la protection durable de vos palettes</p>
+            <div class="cta-buttons">
+                <a href="mailto:contact@sluggrip.com" class="btn-primary" style="background: white; color: #22c55e;">Demander un devis</a>
+                <a href="tel:+33123456789" class="btn-secondary">Nous appeler</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>SlugGrip</h3>
+                    <p>Solution innovante et durable pour la protection des palettes. Emballage plastique recyclable fabriqué à partir de polypropylène recyclé pour réduire l'empreinte environnementale de la logistique.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <a href="#">Emballage recyclable</a>
+                    <a href="#">Maintenance</a>
+                    <a href="#">Service après-vente</a>
+                    <a href="#">Recyclage</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <a href="mailto:contact@sluggrip.com">contact@sluggrip.com</a>
+                    <a href="tel:+33123456789">+33 1 23 45 67 89</a>
+                    <a href="#">France & International</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SlugGrip. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('header-scrolled');
+            } else {
+                navbar.classList.remove('header-scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for scroll animations
+        document.querySelectorAll('.process-step, .activity-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const createMobileMenu = () => {
+            if (window.innerWidth <= 768) {
+                const nav = document.querySelector('nav');
+                const existingToggle = nav.querySelector('.mobile-toggle');
+                
+                if (!existingToggle) {
+                    const menuToggle = document.createElement('button');
+                    menuToggle.innerHTML = '☰';
+                    menuToggle.className = 'mobile-toggle';
+                    menuToggle.style.cssText = `
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        display: block;
+                    `;
+                    
+                    const navMenu = document.querySelector('.nav-menu');
+                    menuToggle.addEventListener('click', () => {
+                        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+                        navMenu.style.flexDirection = 'column';
+                        navMenu.style.position = 'absolute';
+                        navMenu.style.top = '100%';
+                        navMenu.style.left = '0';
+                        navMenu.style.right = '0';
+                        navMenu.style.background = 'rgba(26, 95, 63, 0.95)';
+                        navMenu.style.padding = '1rem';
+                        navMenu.style.backdropFilter = 'blur(10px)';
+                    });
+                    
+                    nav.insertBefore(menuToggle, document.querySelector('.cta-button'));
+                }
+            }
+        };
+
+        // Initialize mobile menu
+        createMobileMenu();
+        window.addEventListener('resize', createMobileMenu);
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.3;
+            
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${rate}px)`;
+            }
+        });
+
+        let map;
+    let routePolyline;
+
+    function trackPackage() {
+        const trackingNumber = document.getElementById('trackingNumber').value.trim();
+        const resultDiv = document.getElementById('trackingResult');
+        const errorDiv = document.getElementById('trackingError');
+        
+        // Hide both initially
+        resultDiv.style.display = 'none';
+        errorDiv.style.display = 'none';
+        
+        if (trackingNumber === '0000') {
+            // Show tracking result with animation
+            setTimeout(() => {
+                resultDiv.style.display = 'block';
+                initializeMap();
+            }, 300);
+        } else if (trackingNumber !== '') {
+            // Show error for any other input
+            setTimeout(() => {
+                errorDiv.style.display = 'block';
+            }, 300);
+        }
+    }
+
+    function initializeMap() {
+        // Wait a bit for the div to be visible
+        setTimeout(() => {
+            // Coordinates for the route
+            const tarbes = [43.2333, 0.0667];  // Tarbes
+            const toulouse = [43.6047, 1.4442]; // Toulouse (current position)
+            const paris = [48.8566, 2.3522];   // Paris
+            
+            // Initialize map centered on France
+            if (map) {
+                map.remove(); // Remove existing map if any
+            }
+            
+            map = L.map('map').setView([45.5, 2.5], 6);
+            
+            // Add tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            
+            // Custom icons
+            const originIcon = L.divIcon({
+                html: '<div style="background: #1a5f3f; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 15px rgba(26,95,63,0.4);">🏭</div>',
+                className: 'custom-div-icon',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            const currentIcon = L.divIcon({
+                html: '<div style="background: #4ade80; color: #1a5f3f; width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 6px 20px rgba(74,222,128,0.5); animation: pulse 2s ease-in-out infinite;">📦</div>',
+                className: 'custom-div-icon',
+                iconSize: [35, 35],
+                iconAnchor: [17.5, 17.5]
+            });
+            
+            const destinationIcon = L.divIcon({
+                html: '<div style="background: #64748b; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 15px rgba(100,116,139,0.4);">🏪</div>',
+                className: 'custom-div-icon',
+                iconSize: [30, 30],
+                iconAnchor: [15, 15]
+            });
+            
+            // Add markers
+            L.marker(tarbes, {icon: originIcon})
+                .addTo(map)
+                .bindPopup('<b>Origine</b><br>Tarbes, France<br><small>Départ: 15/06/2025 08:00</small>');
+                
+            L.marker(toulouse, {icon: currentIcon})
+                .addTo(map)
+                .bindPopup('<b>Position Actuelle</b><br>Toulouse, France<br><small>Dernière mise à jour: 16/06/2025 14:30</small>')
+                .openPopup();
+                
+            L.marker(paris, {icon: destinationIcon})
+                .addTo(map)
+                .bindPopup('<b>Destination</b><br>Paris, France<br><small>Livraison prévue: 17/06/2025 10:00</small>');
+            
+            // Add route line
+            const routeCoordinates = [tarbes, toulouse, paris];
+            routePolyline = L.polyline(routeCoordinates, {
+                color: '#1a5f3f',
+                weight: 4,
+                opacity: 0.8,
+                dashArray: '10, 10'
+            }).addTo(map);
+            
+            // Add completed part of route (Tarbes to Toulouse)
+            const completedRoute = [tarbes, toulouse];
+            L.polyline(completedRoute, {
+                color: '#4ade80',
+                weight: 6,
+                opacity: 1
+            }).addTo(map);
+            
+            // Fit map to show all markers
+            const group = new L.featureGroup([
+                L.marker(tarbes),
+                L.marker(toulouse), 
+                L.marker(paris)
+            ]);
+            map.fitBounds(group.getBounds().pad(0.1));
+            
+        }, 100);
+    }
+
+    // Allow Enter key to trigger tracking
+    document.addEventListener('DOMContentLoaded', function() {
+        const trackingInput = document.getElementById('trackingNumber');
+        if (trackingInput) {
+            trackingInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    trackPackage();
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
